@@ -16,8 +16,14 @@ export const menuInputSchema = z.object({
 });
 
 export const orderPayloadSchema = z.object({
-  customerName: z.string().min(2).max(120),
-  customerPhone: z.string().min(7).max(40),
+  // Letters, spaces and . ' - only (and no dot before a letter), so a name can't hold a number or a web address.
+  customerName: z
+    .string()
+    .trim()
+    .min(2)
+    .max(60)
+    .regex(/^(?!.*\.\p{L})[\p{L}\p{M}][\p{L}\p{M}' .-]*$/u),
+  customerPhone: z.string().trim().regex(/^\+?[0-9 ()-]{7,20}$/),
   fulfillmentType: z.enum(["delivery", "pickup"]),
   notes: z.string().max(500).optional().default(""),
   items: z

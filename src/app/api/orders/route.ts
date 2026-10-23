@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { menuItems, orderItems, orders, settings } from "@/db/schema";
 import { assertAdminApiSession } from "@/lib/admin-session";
+import { getRequestIp } from "@/lib/auth";
+import { hit } from "@/lib/rate-limit";
 import { formatNairaFromKobo } from "@/lib/currency";
 import { orderPayloadSchema, updateOrderStatusSchema } from "@/lib/validators";
 import { sendWhatsAppMessage } from "@/lib/whatsapp";
@@ -26,6 +28,19 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  // Slow down anyone sending orders in bulk (fake orders, spam).
+  const limited = await hit("orders", getRequestIp(request.headers), {
+    limit: 20,
+    windowMs: 10 * 60 * 1000,
+    lockMs: 10 * 60 * 1000,
+  });
+  if (limited.blocked) {
+    return NextResponse.json(
+      { message: "Too many orders from this connection. Please wait a few minutes or call us." },
+      { status: 429 },
+    );
+  }
+
   const body = await request.json().catch(() => null);
   const parsed = orderPayloadSchema.safeParse(body);
   if (!parsed.success) {
@@ -120,9 +135,9 @@ export async function POST(request: Request) {
 
   const itemSummary = lineItems.map((line) => `${line.itemTitle} x${line.quantity}`).join(", ");
 
-  const customerTemplate = `🍔 *BELLE FOOD BY KING MITCHY* 🍔\nThank you for your order, ${parsed.data.customerName}! Your culinary journey is being prepared at our Lekki kitchen.\n\n📜 *ORDER DETAILS:*\n• *Order ID:* #${createdOrder.id.slice(0, 8)}\n• *Items:* ${itemSummary}\n• *Total Amount:* ${formatNairaFromKobo(createdOrder.totalKobo)}\n\n📍 *Status:* Kitchen Preparing 👨‍🍳\nWe operate 24/7! If you have any delivery adjustments, reply directly to this line.\n\n✨ _Taste the luxury of authentic Nigerian cuisine._`;
+  const customerTemplate = `🍔 *BELLE FOOD* 🍔\nThank you for your order, ${parsed.data.customerName}! Your culinary journey is being prepared at our Lekki kitchen.\n\n📜 *ORDER DETAILS:*\n• *Order ID:* #${createdOrder.id.slice(0, 8)}\n• *Items:* ${itemSummary}\n• *Total Amount:* ${formatNairaFromKobo(createdOrder.totalKobo)}\n\n📍 *Status:* Kitchen Preparing 👨‍🍳\nWe operate 24/7! If you have any delivery adjustments, reply directly to this line.\n\n✨ _Taste the luxury of authentic Nigerian cuisine._`;
 
-  const kitchenTemplate = `🚨 *NEW LIVE ORDER RECEIVED* 🚨\n\n• *Customer:* ${parsed.data.customerName} (${parsed.data.customerPhone})\n• *Fulfillment Type:* ${parsed.data.fulfillmentType.toUpperCase()}\n• *Items ordered:* ${itemSummary}\n\n👉 _Log into the Admin Portal (https://bellefood.ng) to assign a delivery rider and mark as dispatched._`;
+  const kitchenTemplate = `🚨 *NEW LIVE ORDER RECEIVED* 🚨\n\n• *Customer:* ${parsed.data.customerName} (${parsed.data.customerPhone})\n• *Fulfillment Type:* ${parsed.data.fulfillmentType.toUpperCase()}\n• *Items ordered:* ${itemSummary}\n\n👉 _Log into the Admin Portal to assign a delivery rider and mark as dispatched._`;
 
   // FIXED: Collect tasks into a Promise matrix. Blocks serverless thread timeout until messages are dispatched completely.
   const notificationTasks = [
@@ -171,15 +186,4 @@ export async function DELETE(request: Request) {
 
   await db.delete(orders).where(eq(orders.id, orderId));
   return NextResponse.json({ ok: true });
-}
-
-export async function OPTIONS() {
-  const [{ totalRevenueKobo, orderCount }] = await db
-    .select({
-      totalRevenueKobo: sql<number>`coalesce(sum(${orders.totalKobo}), 0)`,
-      orderCount: sql<number>`count(*)`,
-    })
-    .from(orders);
-
-  return NextResponse.json({ totalRevenueKobo, orderCount });
 }

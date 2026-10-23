@@ -6,7 +6,7 @@ import { assertAdminApiSession } from "@/lib/admin-session";
 const MAX_FILE_SIZE_BYTES = 8 * 1024 * 1024;
 
 function getCloudinaryConfig() {
-  const cloudName = process.env.CLOUDINARY_CLOUD_NAME ?? "dqdm190zn";
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
   const apiKey = process.env.CLOUDINARY_API_KEY;
   const apiSecret = process.env.CLOUDINARY_API_SECRET;
   const folder = process.env.CLOUDINARY_UPLOAD_FOLDER ?? "belle-food";
@@ -30,7 +30,6 @@ export async function POST(request: Request) {
   const isAdmin = await assertAdminApiSession();
   if (!isAdmin) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
-  // INTEGRATED CLOUDINARY CONFIG: Injects your direct 'dqdm190zn' server target pipeline natively
   const cloudinary = getCloudinaryConfig();
   if (!cloudinary) {
     return NextResponse.json(
@@ -87,8 +86,7 @@ export async function POST(request: Request) {
   });
 
   if (!uploadResponse.ok) {
-    const errorText = await uploadResponse.text();
-    return NextResponse.json({ message: "Cloud upload failed", detail: errorText }, { status: 502 });
+    return NextResponse.json({ message: "Cloud upload failed" }, { status: 502 });
   }
 
   const uploaded = (await uploadResponse.json()) as { secure_url?: string };
