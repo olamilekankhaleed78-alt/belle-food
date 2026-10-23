@@ -19,7 +19,7 @@ export function Story() {
         <Reveal delay={0.15}>
           <p className="mb-3 text-xs uppercase tracking-[0.28em] text-zinc-500">Our Story</p>
           <h2 className="font-serif-display text-4xl leading-tight text-zinc-950 md:text-5xl">
-            # Discover Authentic Nigerian Cuisine
+            Discover Authentic Nigerian Cuisine
           </h2>
           <p className="mt-6 text-base leading-8 text-zinc-700">
             In the heart of Lekki, Belle Food by King Mitchy serves a refined 24/7 culinary journey where

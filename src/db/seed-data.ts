@@ -9,7 +9,7 @@ const starterMenu = [
     description:
       "A lavish spread of premium native swallows served with a choice of rich, authentic soups (Eforiro, Egusi, or Fisherman Soup). Plated with an abundance of assorted proteins including goat meat, snails, smoked fish, and kpomo.",
     priceKobo: 2500000, // ₦25,000 represented cleanly as kobo integer format
-    imagePath: "https://unsplash.com",
+    imagePath: "/images/dish-placeholder.svg",
     isSpicy: true,
     isVegan: false,
     isAvailable: true,
@@ -20,7 +20,7 @@ const starterMenu = [
     description:
       "An upscale celebration of coastal heritage. Fresh, catch-of-the-day jumbo prawns, crab claws, calamari, and whole croaker fish slow-simmered in a highly seasoned, aromatic native broth. Served alongside premium plantain and yam wedges.",
     priceKobo: 2900000, // ₦29,000
-    imagePath: "https://unsplash.com",
+    imagePath: "/images/dish-placeholder.svg",
     isSpicy: true,
     isVegan: false,
     isAvailable: true,
@@ -31,7 +31,7 @@ const starterMenu = [
     description:
       "Belle Food's legendary party style smokey Jollof Rice paired with rich Native Fried Rice. Accompanied by gourmet grilled turkey, spicy peppered gizzard, sweet dodo, and crisp artisan garden salads.",
     priceKobo: 2750000, // ₦27,500
-    imagePath: "https://unsplash.com",
+    imagePath: "/images/dish-placeholder.svg",
     isSpicy: false,
     isVegan: false,
     isAvailable: true,
