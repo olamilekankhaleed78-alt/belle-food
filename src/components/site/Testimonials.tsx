@@ -24,7 +24,7 @@ export function Testimonials() {
     <section className="py-20 md:py-24">
       <div className="section-shell">
         <Reveal>
-          <h2 className="font-serif-display text-4xl text-white md:text-5xl"># Why Belle Food</h2>
+          <h2 className="font-serif-display text-4xl text-white md:text-5xl">Why Belle Food</h2>
         </Reveal>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">

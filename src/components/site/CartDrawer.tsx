@@ -30,7 +30,7 @@ export function CartDrawer() {
               onClick={(event) => event.stopPropagation()}
             >
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-serif-display text-3xl"># Cart</h3>
+                <h3 className="font-serif-display text-3xl">Cart</h3>
                 <button type="button" onClick={closeCart} className="text-sm text-zinc-400 hover:text-white">
                   Close
                 </button>

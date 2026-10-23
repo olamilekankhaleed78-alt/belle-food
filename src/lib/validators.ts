@@ -9,7 +9,7 @@ export const menuInputSchema = z.object({
     .max(120)
     .regex(/^[a-z0-9-]+$/),
   priceNaira: z.number().positive().max(100000000),
-  imagePath: z.string().url().or(z.string().startsWith("/uploads/")),
+  imagePath: z.string().url().or(z.string().startsWith("/")),
   isSpicy: z.boolean().optional().default(false),
   isVegan: z.boolean().optional().default(false),
   isAvailable: z.boolean().optional().default(true),

@@ -55,7 +55,7 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
     <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/70 p-4">
       <div className="w-full max-w-xl border border-[#222] bg-[#111] p-6 text-zinc-100">
         <div className="mb-5 flex items-center justify-between">
-          <h3 className="font-serif-display text-3xl"># Checkout</h3>
+          <h3 className="font-serif-display text-3xl">Checkout</h3>
           <button onClick={onClose} className="text-sm text-zinc-400 hover:text-white" type="button">
             Close
           </button>

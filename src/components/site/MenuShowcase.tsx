@@ -17,7 +17,7 @@ export function MenuShowcase({ items }: { items: StoreMenuItem[] }) {
         <Reveal>
           <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">Culinary Highlights</p>
           <h2 className="mt-4 font-serif-display text-4xl leading-tight text-white md:text-5xl">
-            # Signature Menu Showcase
+            Signature Menu Showcase
           </h2>
         </Reveal>
 

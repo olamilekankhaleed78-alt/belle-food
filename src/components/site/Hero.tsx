@@ -19,7 +19,7 @@ export function Hero() {
       <div className="section-shell relative z-10 flex min-h-[92vh] items-center justify-center text-center">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm uppercase tracking-[0.35em] text-[#d4af37]">Welcome to</p>
-          <h1 className="font-serif-display text-[clamp(3rem,12vw,7.5rem)] leading-[0.95] text-white"># Belle Food</h1>
+          <h1 className="font-serif-display text-[clamp(3rem,12vw,7.5rem)] leading-[0.95] text-white">Belle Food</h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-zinc-300 md:text-lg">
             A premium traditional Nigerian Dining Experience in Lagos. Open 24/7.
           </p>
