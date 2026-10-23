@@ -7,7 +7,7 @@ const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
-  title: "Belle Food by King Mitchy",
+  title: "Belle Food",
   description: "Premium traditional Nigerian dining experience in Lagos.",
 };
 

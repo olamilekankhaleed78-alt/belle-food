@@ -6,18 +6,25 @@ import { Reveal } from "@/components/site/Reveal";
 import { useCart } from "@/components/site/CartContext";
 import { SignaturePots } from "@/components/site/SignaturePots";
 import { formatNairaFromKobo } from "@/lib/currency";
+import type { SiteContent } from "@/lib/site-content";
 import type { StoreMenuItem } from "@/lib/types";
 
-export function MenuShowcase({ items }: { items: StoreMenuItem[] }) {
+export function MenuShowcase({
+  items,
+  content,
+}: {
+  items: StoreMenuItem[];
+  content: SiteContent["menuSection"];
+}) {
   const { addItem } = useCart();
 
   return (
     <section id="menu" className="border-y border-[#222] py-20 md:py-24">
       <div className="section-shell">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">Culinary Highlights</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">{content.eyebrow}</p>
           <h2 className="mt-4 font-serif-display text-4xl leading-tight text-white md:text-5xl">
-            Signature Menu Showcase
+            {content.heading}
           </h2>
         </Reveal>
 

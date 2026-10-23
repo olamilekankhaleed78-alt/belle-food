@@ -28,7 +28,7 @@ export function SettingsManager() {
 
   return (
     <form className="space-y-3 border border-[#222] p-4" onSubmit={save}>
-      <h3 className="font-serif-display text-2xl"># Operational Settings</h3>
+      <h3 className="font-serif-display text-2xl">Operational Settings</h3>
 
       <input
         value={settings.kitchenWhatsApp}

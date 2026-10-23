@@ -35,7 +35,7 @@ export function LoginForm() {
 
   return (
     <form onSubmit={submit} className="w-full max-w-md border border-[#222] bg-[#121212] p-6">
-      <h1 className="font-serif-display text-4xl text-white"># Admin Login</h1>
+      <h1 className="font-serif-display text-4xl text-white">Admin Login</h1>
       <p className="mt-2 text-sm text-zinc-400">Secure access for Belle Food operations.</p>
 
       <div className="mt-6 space-y-3">

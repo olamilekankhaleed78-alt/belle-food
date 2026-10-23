@@ -1,34 +1,34 @@
 import Image from "next/image";
 import { Reveal } from "@/components/site/Reveal";
+import type { SiteContent } from "@/lib/site-content";
 
-export function Story() {
+export function Story({ content }: { content: SiteContent["story"] }) {
   return (
     <section id="story" className="bg-white py-20 text-zinc-900 md:py-28">
-      <div className="section-shell grid items-center gap-10 md:grid-cols-2">
-        <Reveal>
-          <div className="relative min-h-[420px] overflow-hidden border border-zinc-200">
-            <Image
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80"
-              alt="Luxury Belle Food dining interior"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </Reveal>
+      <div
+        className={`section-shell grid items-center gap-10 ${content.imageUrl ? "md:grid-cols-2" : ""}`}
+      >
+        {content.imageUrl ? (
+          <Reveal>
+            <div className="relative min-h-[420px] overflow-hidden border border-zinc-200">
+              <Image src={content.imageUrl} alt={content.heading || "Our story"} fill className="object-cover" />
+            </div>
+          </Reveal>
+        ) : null}
 
         <Reveal delay={0.15}>
-          <p className="mb-3 text-xs uppercase tracking-[0.28em] text-zinc-500">Our Story</p>
+          {content.eyebrow ? (
+            <p className="mb-3 text-xs uppercase tracking-[0.28em] text-zinc-500">{content.eyebrow}</p>
+          ) : null}
           <h2 className="font-serif-display text-4xl leading-tight text-zinc-950 md:text-5xl">
-            Discover Authentic Nigerian Cuisine
+            {content.heading}
           </h2>
-          <p className="mt-6 text-base leading-8 text-zinc-700">
-            In the heart of Lekki, Belle Food by King Mitchy serves a refined 24/7 culinary journey where
-            traditional Nigerian flavors are elevated with craftsmanship, premium hospitality, and community
-            warmth. Every platter celebrates heritage, artistry, and togetherness.
-          </p>
-          <a href="#menu" className="mt-8 inline-block text-sm uppercase tracking-[0.12em] text-zinc-900 underline">
-            Explore Signature Pots
-          </a>
+          <p className="mt-6 whitespace-pre-line text-base leading-8 text-zinc-700">{content.body}</p>
+          {content.linkText ? (
+            <a href="#menu" className="mt-8 inline-block text-sm uppercase tracking-[0.12em] text-zinc-900 underline">
+              {content.linkText}
+            </a>
+          ) : null}
         </Reveal>
       </div>
     </section>

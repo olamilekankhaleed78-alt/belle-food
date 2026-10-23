@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { AdminDashboard } from "@/components/admin/AdminDashboard";
+import { ContentManager } from "@/components/admin/ContentManager";
 import { MenuManager } from "@/components/admin/MenuManager";
 import { OrdersManager } from "@/components/admin/OrdersManager";
 import { SettingsManager } from "@/components/admin/SettingsManager";
 
-const tabs = ["Dashboard", "Menu", "Orders", "Settings"] as const;
+const tabs = ["Dashboard", "Menu", "Website Text", "Orders", "Settings"] as const;
 
 type TabName = (typeof tabs)[number];
 
@@ -22,7 +23,7 @@ export function AdminPortal() {
     <div className="min-h-screen bg-[#111] text-zinc-100">
       <header className="border-b border-[#222]">
         <div className="section-shell flex flex-wrap items-center justify-between gap-4 py-5">
-          <h1 className="font-serif-display text-3xl"># Belle Food Admin</h1>
+          <h1 className="font-serif-display text-3xl">Belle Food Admin</h1>
           <button onClick={logout} className="border border-[#2e2e2e] px-3 py-2 text-xs uppercase tracking-[0.12em]">
             Logout
           </button>
@@ -46,6 +47,7 @@ export function AdminPortal() {
 
         {tab === "Dashboard" ? <AdminDashboard /> : null}
         {tab === "Menu" ? <MenuManager /> : null}
+        {tab === "Website Text" ? <ContentManager /> : null}
         {tab === "Orders" ? <OrdersManager /> : null}
         {tab === "Settings" ? <SettingsManager /> : null}
       </main>

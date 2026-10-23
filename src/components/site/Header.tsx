@@ -9,13 +9,13 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function Header() {
+export function Header({ brandName, buttonText }: { brandName: string; buttonText: string }) {
   const { openCart, itemCount } = useCart();
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#222] bg-black/60 backdrop-blur-md">
       <div className="section-shell flex h-20 items-center justify-between gap-4">
-        <p className="text-sm font-semibold tracking-[0.28em] text-white">BELLE FOOD</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white">{brandName}</p>
 
         <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
@@ -37,12 +37,14 @@ export function Header() {
           >
             Cart ({itemCount})
           </button>
-          <a
-            href="#contact"
-            className="bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-black"
-          >
-            Book a Table
-          </a>
+          {buttonText ? (
+            <a
+              href="#contact"
+              className="bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-black"
+            >
+              {buttonText}
+            </a>
+          ) : null}
         </div>
       </div>
     </header>

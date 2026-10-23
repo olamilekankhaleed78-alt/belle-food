@@ -91,7 +91,7 @@ export function MenuManager() {
     <section className="grid gap-5 lg:grid-cols-[1fr_1.4fr]">
       <div className="border border-[#222] p-4">
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-serif-display text-2xl"># Menu Items</h3>
+          <h3 className="font-serif-display text-2xl">Menu Items</h3>
           <button
             type="button"
             className="text-xs uppercase tracking-[0.12em] text-zinc-400"
@@ -117,7 +117,7 @@ export function MenuManager() {
       </div>
 
       <form className="space-y-3 border border-[#222] p-4" onSubmit={save}>
-        <h3 className="font-serif-display text-2xl"># Item Editor</h3>
+        <h3 className="font-serif-display text-2xl">Item Editor</h3>
 
         <input
           value={selected.title}

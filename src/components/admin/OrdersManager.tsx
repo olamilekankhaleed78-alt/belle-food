@@ -41,7 +41,7 @@ export function OrdersManager() {
 
   return (
     <section className="border border-[#222] p-4">
-      <h3 className="font-serif-display text-2xl"># Orders Pipeline</h3>
+      <h3 className="font-serif-display text-2xl">Orders Pipeline</h3>
 
       <div className="mt-4 space-y-3">
         {orders.map((order) => (
