@@ -166,6 +166,9 @@ export function ContentManager() {
 
       <Section title="Contact and footer">
         <Field label="Address" value={content.contact.address} onChange={(v) => update((d) => { d.contact.address = v; })} />
+        <Field label="WhatsApp number" value={content.contact.whatsappNumber} onChange={(v) => update((d) => { d.contact.whatsappNumber = v; })} hint="Example: 08012345678. Once set, the Book a Table buttons open a WhatsApp chat with this number." />
+        <Field label="Message sent when someone taps Book a Table" value={content.contact.bookingMessage} multiline onChange={(v) => update((d) => { d.contact.bookingMessage = v; })} />
+        <Field label="Phone number for calls (optional)" value={content.contact.phone} onChange={(v) => update((d) => { d.contact.phone = v; })} hint="Shows a tap-to-call link in the footer." />
         <Field label="Opening hours, line 1" value={content.contact.hoursLine1} onChange={(v) => update((d) => { d.contact.hoursLine1 = v; })} />
         <Field label="Opening hours, line 2" value={content.contact.hoursLine2} onChange={(v) => update((d) => { d.contact.hoursLine2 = v; })} />
         <Field label="Instagram name" value={content.contact.instagramHandle} onChange={(v) => update((d) => { d.contact.instagramHandle = v; })} />

@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { SiteContent } from "@/lib/site-content";
 
-export function Hero({ content }: { content: SiteContent["hero"] }) {
+export function Hero({ content, primaryHref }: { content: SiteContent["hero"]; primaryHref: string }) {
   const ref = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
@@ -30,7 +30,8 @@ export function Hero({ content }: { content: SiteContent["hero"] }) {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             {content.primaryButton ? (
               <a
-                href="#contact"
+                href={primaryHref}
+                {...(primaryHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
                 className="bg-white px-8 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-black"
               >
                 {content.primaryButton}

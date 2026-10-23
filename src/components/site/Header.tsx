@@ -9,7 +9,15 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function Header({ brandName, buttonText }: { brandName: string; buttonText: string }) {
+export function Header({
+  brandName,
+  buttonText,
+  buttonHref,
+}: {
+  brandName: string;
+  buttonText: string;
+  buttonHref: string;
+}) {
   const { openCart, itemCount } = useCart();
 
   return (
@@ -39,7 +47,8 @@ export function Header({ brandName, buttonText }: { brandName: string; buttonTex
           </button>
           {buttonText ? (
             <a
-              href="#contact"
+              href={buttonHref}
+              {...(buttonHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
               className="bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-black"
             >
               {buttonText}

@@ -8,10 +8,15 @@ import { Hero } from "@/components/site/Hero";
 import { MenuShowcase } from "@/components/site/MenuShowcase";
 import { Story } from "@/components/site/Story";
 import { Testimonials } from "@/components/site/Testimonials";
+import { whatsappLink } from "@/lib/contact-links";
 import type { SiteContent } from "@/lib/site-content";
 import type { StoreMenuItem } from "@/lib/types";
 
 export function Storefront({ items, content }: { items: StoreMenuItem[]; content: SiteContent }) {
+  // "Book a Table" opens WhatsApp once a number is set in the admin; until then it scrolls to Contact.
+  const bookHref =
+    whatsappLink(content.contact.whatsappNumber, content.contact.bookingMessage) || "#contact";
+
   return (
     <CartProvider>
       {content.demoBanner.enabled && content.demoBanner.text ? (
@@ -19,8 +24,8 @@ export function Storefront({ items, content }: { items: StoreMenuItem[]; content
           {content.demoBanner.text}
         </div>
       ) : null}
-      <Header brandName={content.brandName} buttonText={content.headerButtonText} />
-      <Hero content={content.hero} />
+      <Header brandName={content.brandName} buttonText={content.headerButtonText} buttonHref={bookHref} />
+      <Hero content={content.hero} primaryHref={bookHref} />
       <Story content={content.story} />
       <MenuShowcase items={items} content={content.menuSection} />
       <Testimonials content={content.features} />

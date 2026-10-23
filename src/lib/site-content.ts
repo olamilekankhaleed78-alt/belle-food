@@ -41,6 +41,9 @@ export const siteContentSchema = z.object({
     hoursLine2: text(80),
     instagramHandle: text(60),
     instagramUrl: link,
+    phone: text(30),
+    whatsappNumber: text(30),
+    bookingMessage: text(300),
   }),
 });
 
@@ -97,6 +100,9 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     hoursLine2: "7 Days a Week",
     instagramHandle: "@bellefoodlagos_",
     instagramUrl: "https://instagram.com/bellefoodlagos_",
+    phone: "",
+    whatsappNumber: "",
+    bookingMessage: "Hello! I'd like to book a table. Date: ___  Time: ___  Number of people: ___",
   },
 };
 
